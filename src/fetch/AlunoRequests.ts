@@ -22,14 +22,20 @@ class AlunoRequests {
      */
     async listarAlunos() {
         try {
+            // faz a requisição no servidor
             const respostaAPI = await fetch(`${this.serverURL}${this.routeListaAluno}`);
 
+            // verifica se a resposta é bem sucedida
             if(respostaAPI.ok) {
+                // converte a reposta para um JSON
                 const listaDeAlunos = await respostaAPI.json();
+                // retorna a resposta
                 return listaDeAlunos;
             }
         } catch (error) {
+            // exibe detalhes do erro no console
             console.error(`Erro ao fazer a consulta: ${error}`);
+            // retorna um valor nulo
             return null;
         }
     }
