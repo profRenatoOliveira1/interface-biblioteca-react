@@ -1,44 +1,54 @@
 import { SERVER_CFG } from '../appConfig';
 
+/**
+ * Classe com a coleção de funções que farão as requisições à API
+ * Esta classe representa apenas as requisições da entidade Aluno
+ */
 class AlunoRequests {
 
-    private serverURL;
-    private routeListaAluno;
-    private routeCadastraAluno;
-    private routeAtualizaAluno;
-    private routeRemoveAluno;
+    private serverURL: string;          // Variável para o endereço do servidor
+    private routeListaAlunos: string;   // Variável para a rota de listagem de alunos
+    private routeCadastraAluno: string; // Variável para a rota de cadastro de aluno
+    private routeAtualizaAluno: string; // Variável para a rota de atualiação de aluno
+    private routeRemoveAluno: string;   // Variável para a rota de remoção do aluno
 
+    /**
+     * O construtor é chamado automaticamente quando criamos uma nova instância da classe.
+     * Ele define os valores iniciais das variáveis com base nas configurações da API.
+     */
     constructor() {
-        this.serverURL = SERVER_CFG.SERVER_URL;
-        this.routeListaAluno = '/lista/alunos'; // Rota configurada na API
-        this.routeCadastraAluno = '/novo/aluno'; // Rota configurada na API
+        this.serverURL = SERVER_CFG.SERVER_URL;     // Endereço do servidor web
+        this.routeListaAlunos = '/lista/alunos';    // Rota configurada na API
+        this.routeCadastraAluno = '/novo/aluno';    // Rota configurada na API
         this.routeAtualizaAluno = '/atualiza/aluno'; // Rota configurada na API
-        this.routeRemoveAluno = '/remove/aluno'; // Rota configurada na API
+        this.routeRemoveAluno = '/remove/aluno';    // Rota configurada na API
     }
 
     /**
-     * Função que busca a lista de alunos na API
-     * @returns Lista com os alunos cadastrados no sistema
+     * Método que faz uma requisição à API para buscar a lista de alunos cadastrados
+     * @returns Retorna um JSON com a lista de alunos ou null em caso de erro
      */
-    async listarAlunos() {
+    async listarAlunos(): Promise<JSON | null > {
         try {
             // faz a requisição no servidor
-            const respostaAPI = await fetch(`${this.serverURL}${this.routeListaAluno}`);
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeListaAlunos}`);
 
-            // verifica se a resposta é bem sucedida
+            // Verifica se a resposta foi bem-sucedida (status HTTP 200-299)
             if(respostaAPI.ok) {
                 // converte a reposta para um JSON
-                const listaDeAlunos = await respostaAPI.json();
+                const listaDeAlunos: JSON = await respostaAPI.json();
                 // retorna a resposta
                 return listaDeAlunos;
             }
+            return null;
         } catch (error) {
             // exibe detalhes do erro no console
-            console.error(`Erro ao fazer a consulta: ${error}`);
+            console.error(`Erro ao fazer a consulta de alunos: ${error}`);
             // retorna um valor nulo
             return null;
         }
     }
 }
 
+// Exporta a classe já instanciando um objeto da mesma
 export default new AlunoRequests();
