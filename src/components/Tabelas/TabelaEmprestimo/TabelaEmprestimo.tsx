@@ -11,10 +11,11 @@ import EmprestimoRequests from '../../../fetch/EmprestimoRequests'; // Importa a
 
 // Importa o arquivo CSS com estilos específicos para este componente
 import estilo from './TabelaEmprestimo.module.css'; // Importa os estilos específicos para este componente
+import EmprestimoDTO from '../../../interfaces/EmprestimoInterface';
 
 function TabelaEmprestimo(): JSX.Element {
     // Define o estado local para armazenar os dados dos empréstimos
-    const [emprestimos, setEmprestimos] = useState<JSON[]>([]);
+    const [emprestimos, setEmprestimos] = useState<EmprestimoDTO[]>([]);
 
     // Botões personalizados para a paginação da tabela (utilizado pelo componente DataTable da lib PrimeReact)
     const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />; // Botão de "refresh" na esquerda

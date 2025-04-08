@@ -11,11 +11,12 @@ import LivroRequests from '../../../fetch/LivroRequests';
 
 // Importa o arquivo CSS com estilos específicos para este componente
 import estilo from './TabelaLivro.module.css';
+import LivroDTO from '../../../interfaces/LivroInterface';
 
 // Declara o componente funcional TabelaLivro
 function TabelaLivro(): JSX.Element {
     // Hook useState para armazenar a lista de livros
-    const [livros, setLivros] = useState<JSON[]>([]);
+    const [livros, setLivros] = useState<LivroDTO[]>([]);
 
     // Botões personalizados para a paginação da tabela (utilizado pelo componente DataTable da lib PrimeReact)
     const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;

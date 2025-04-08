@@ -11,6 +11,7 @@ import AlunoRequests from '../../../fetch/AlunoRequests'; // Importa a classe re
 
 // Importa o arquivo CSS com estilos específicos para este componente
 import estilo from './TabelaAluno.module.css'; // Importa os estilos específicos para este componente
+import AlunoDTO from '../../../interfaces/AlunoInterface';
 
 /**
  * Componente que exibe uma tabela com os dados dos alunos.
@@ -18,7 +19,7 @@ import estilo from './TabelaAluno.module.css'; // Importa os estilos específico
  */
 function TabelaAluno(): JSX.Element {
     // Hook useState: cria uma variável de estado chamada `alunos` para armazenar os dados dos alunos
-    const [alunos, setAlunos] = useState<JSON[]>([]);
+    const [alunos, setAlunos] = useState<AlunoDTO[]>([]);
 
     // Botões personalizados para a paginação da tabela (utilizado pelo componente DataTable da lib PrimeReact)
     const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
