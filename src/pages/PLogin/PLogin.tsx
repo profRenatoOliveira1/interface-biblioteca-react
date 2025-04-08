@@ -10,7 +10,7 @@ import Rodape from "../../components/Rodape/Rodape";
 // Componente funcional que representa a página de login
 function PLogin() {
     return (
-        <>
+        <div className="pagina-grid">
             {/* Renderiza o cabeçalho da página */}
             <Cabecalho />
 
@@ -19,7 +19,7 @@ function PLogin() {
 
             {/* Renderiza o rodapé da página */}
             <Rodape />
-        </>
+        </div>
     );
 }
 

@@ -43,17 +43,17 @@ function TabelaAluno(): JSX.Element {
     }, []); // Array vazio garante que será executado apenas uma vez (montagem do componente)
 
     return (
-        <>
+        <main>
             {/* Título da tabela com classe personalizada */}
             <h1 className={estilo['header-tabela-aluno']}>Lista de Alunos</h1>
-            
+
             {/* Componente DataTable: renderiza a tabela com os dados dos alunos */}
             <DataTable
                 value={alunos} // Define os dados que serão exibidos
                 paginator // Habilita paginação
                 rows={5} // Quantidade de linhas por página
                 rowsPerPageOptions={[5, 10, 25, 50]} // Opções de linhas por página
-                tableStyle={{ minWidth: '50rem', minHeight: '60vh' }} // Estilização mínima da tabela
+                tableStyle={{ minWidth: '50rem' }} // Estilização mínima da tabela
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" // Template da paginação
                 currentPageReportTemplate="{first} de {last} total {totalRecords}" // Template do relatório da página
                 paginatorLeft={paginatorLeft} // Botão à esquerda da paginação
@@ -92,7 +92,7 @@ function TabelaAluno(): JSX.Element {
                     }}
                 />
             </DataTable>
-        </>
+        </main>
     );
 }
 

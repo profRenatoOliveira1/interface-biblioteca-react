@@ -37,7 +37,7 @@ function TabelaLivro(): JSX.Element {
     }, []); // Array vazio garante que será executado apenas uma vez (montagem do componente)
 
     return (
-        <>
+        <main>
             {/* Título da tabela com classe personalizada */}
             <h1 className={estilo['header-tabela-livro']}>Lista de Livros</h1>
 
@@ -45,9 +45,9 @@ function TabelaLivro(): JSX.Element {
             <DataTable
                 value={livros} // Fonte de dados da tabela
                 paginator // Ativa paginação
-                rows={10} // Mostra 10 registros por página por padrão
+                rows={5} // Mostra 10 registros por página por padrão
                 rowsPerPageOptions={[5, 10, 25, 50]} // Opções que o usuário pode escolher
-                tableStyle={{ minWidth: '50rem', minHeight: '60vh' }} // Define um estilo mínimo para a tabela
+                tableStyle={{ minWidth: '50rem' }} // Define um estilo mínimo para a tabela
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" // Layout dos controles de paginação
                 currentPageReportTemplate="{first} de {last} total {totalRecords}" // Texto que exibe o status da paginação
                 paginatorLeft={paginatorLeft} // Botão à esquerda da paginação
@@ -57,14 +57,14 @@ function TabelaLivro(): JSX.Element {
                 {/* Colunas que representam os atributos de cada livro */}
                 <Column field="titulo" header="Titulo" style={{ width: '20%' }} />
                 <Column field="autor" header="Autor" style={{ width: '20%' }} />
-                <Column field="editora" header="Editora" style={{ width: '20%' }} />
-                <Column field="isbn" header="ISBN" style={{ width: '20%' }} />
+                <Column field="editora" header="Editora" style={{ width: '15%' }} />
+                <Column field="isbn" header="ISBN" style={{ width: '10%' }} />
 
                 {/* Coluna que exibe o valor de aquisição formatado como moeda brasileira */}
                 <Column
                     field="valorAquisicao"
                     header="Valor de Aquisição"
-                    style={{ width: '20%' }}
+                    style={{ width: '10%' }}
                     body={(rowData) => {
                         const valor = Number(rowData.valorAquisicao); // Converte o valor para número
                         return valor.toLocaleString('pt-BR', {
@@ -74,7 +74,7 @@ function TabelaLivro(): JSX.Element {
                     }}
                 />
             </DataTable>
-        </>
+        </main>
     );
 }
 

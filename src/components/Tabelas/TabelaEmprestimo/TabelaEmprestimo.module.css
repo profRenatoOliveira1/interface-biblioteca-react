@@ -1,7 +1,8 @@
 /* TabelaAluno.module.css */
 
 .header-tabela-emprestimo {
-    margin: auto auto;
+    text-align: center;
+    margin: 2% auto;
 }
 
 .data-table {
@@ -10,8 +11,8 @@
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
+    margin: 5% auto 0 auto;
     width: 90%;
-    margin: auto auto;
 }
 
 .data-table :global(.p-datatable) {

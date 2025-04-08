@@ -13,7 +13,7 @@ import Rodape from "../../components/Rodape/Rodape";
 // Declara o componente funcional PHome, que representa a página inicial
 function PHome(): JSX.Element {
     return (
-        <>
+        <div className="pagina-grid">
             {/* Renderiza o cabeçalho da página */}
             <Cabecalho />
 
@@ -22,7 +22,7 @@ function PHome(): JSX.Element {
 
             {/* Renderiza o rodapé da página */}
             <Rodape />
-        </>
+        </div>
     );
 }
 

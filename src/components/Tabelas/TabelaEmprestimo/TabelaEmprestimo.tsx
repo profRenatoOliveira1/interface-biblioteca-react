@@ -38,7 +38,7 @@ function TabelaEmprestimo(): JSX.Element {
     }, []); // Array vazio indica que esse efeito será executado apenas uma vez (componenteDidMount)
 
     return (
-        <>
+        <main>
             {/* Título da tabela com classe personalizada */}
             <h1 className={estilo['header-tabela-emprestimo']}>Lista de Empréstimos</h1>
 
@@ -48,7 +48,7 @@ function TabelaEmprestimo(): JSX.Element {
                 paginator // Habilita paginação
                 rows={5} // Quantidade de linhas por página
                 rowsPerPageOptions={[5, 10, 25, 50]} // Opções de linhas por página
-                tableStyle={{ minWidth: '50rem', minHeight: '60vh' }} // Estilização mínima da tabela
+                tableStyle={{ minWidth: '50rem' }} // Estilização mínima da tabela
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" // Template da paginação
                 currentPageReportTemplate="{first} de {last} total {totalRecords}" // Template do relatório da página
                 paginatorLeft={paginatorLeft} // Botão à esquerda da paginação
@@ -56,8 +56,8 @@ function TabelaEmprestimo(): JSX.Element {
                 className={estilo['data-table']} // Classe CSS personalizada
             >
                 {/* Colunas da tabela, baseadas nos campos dos objetos de empréstimo */}
-                <Column field="aluno.nome" header="Aluno" style={{ width: '15%' }} /> {/* Nome do aluno */}
-                <Column field="livro.titulo" header="Livro" style={{ width: '15%' }} /> {/* Título do livro */}
+                <Column field="aluno.nome" header="Aluno" style={{ width: '10%' }} /> {/* Nome do aluno */}
+                <Column field="livro.titulo" header="Livro" /> {/* Título do livro */}
 
                 {/* Coluna personalizada para exibir a data do empréstimo formatada */}
                 <Column
@@ -90,7 +90,7 @@ function TabelaEmprestimo(): JSX.Element {
                 {/* Coluna com o status do empréstimo (ex: "pendente", "devolvido") */}
                 <Column field="statusEmprestimo" header="Status do empréstimo" style={{ width: '15%' }} />
             </DataTable>
-        </>
+        </main>
     );
 }
 

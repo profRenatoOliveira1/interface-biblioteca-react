@@ -13,7 +13,7 @@ import Rodape from "../../../components/Rodape/Rodape";
 // Componente funcional que representa a página de listagem de empréstimos
 function PListaEmprestimos(): JSX.Element {
     return (
-        <>
+        <div className="pagina-grid">
             {/* Renderiza o cabeçalho da página */}
             <Cabecalho />
 
@@ -22,7 +22,7 @@ function PListaEmprestimos(): JSX.Element {
 
             {/* Renderiza o rodapé da página */}
             <Rodape />
-        </>
+        </div>
     );
 }
 
