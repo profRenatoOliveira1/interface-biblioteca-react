@@ -1,4 +1,5 @@
 import { SERVER_CFG } from '../appConfig';
+import AlunoDTO from '../interfaces/AlunoInterface';
 
 /**
  * Classe com a coleção de funções que farão as requisições à API
@@ -28,18 +29,20 @@ class AlunoRequests {
      * Método que faz uma requisição à API para buscar a lista de alunos cadastrados
      * @returns Retorna um JSON com a lista de alunos ou null em caso de erro
      */
-    async listarAlunos(): Promise<JSON | null > {
+    async listarAlunos(): Promise<AlunoDTO | null> {
         try {
             // faz a requisição no servidor
             const respostaAPI = await fetch(`${this.serverURL}${this.routeListaAlunos}`);
 
             // Verifica se a resposta foi bem-sucedida (status HTTP 200-299)
-            if(respostaAPI.ok) {
+            if (respostaAPI.ok) {
                 // converte a reposta para um JSON
-                const listaDeAlunos: JSON = await respostaAPI.json();
+                const listaDeAlunos: AlunoDTO = await respostaAPI.json();
                 // retorna a resposta
                 return listaDeAlunos;
             }
+            
+            // retorna um valor nulo caso o servidor não envie a resposta
             return null;
         } catch (error) {
             // exibe detalhes do erro no console

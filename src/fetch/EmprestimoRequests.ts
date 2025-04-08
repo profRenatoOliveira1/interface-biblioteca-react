@@ -1,5 +1,6 @@
 // Importa as configurações do servidor (como a URL base da API)
 import { SERVER_CFG } from "../appConfig";
+import EmprestimoDTO from "../interfaces/EmprestimoInterface";
 
 /**
  * Classe responsável por fazer as requisições da entidade Empréstimo.
@@ -29,7 +30,7 @@ class EmprestimoRequests {
      * Método assíncrono que faz uma requisição GET para a API buscando todos os empréstimos cadastrados.
      * @returns Um objeto JSON contendo a lista de empréstimos, ou null em caso de erro
      */
-    async listarEmprestimos(): Promise<JSON | null | undefined> {
+    async listarEmprestimos(): Promise<EmprestimoDTO | null> {
         try {
             // Envia a requisição para a rota de listagem de empréstimos
             const respostaAPI = await fetch(`${this.serverURL}${this.routeListaEmprestimos}`);
@@ -37,11 +38,14 @@ class EmprestimoRequests {
             // Verifica se a resposta foi bem-sucedida (status HTTP 200-299)
             if (respostaAPI.ok) {
                 // Converte a resposta em JSON
-                const listaDeEmprestimos: JSON = await respostaAPI.json();
+                const listaDeEmprestimos: EmprestimoDTO = await respostaAPI.json();
 
                 // Retorna a lista obtida
                 return listaDeEmprestimos;
             }
+
+            // retorna um valor nulo caso o servidor não envie a resposta
+            return null;
         } catch (error) {
             // Exibe o erro no console, útil para depuração
             console.error(`Erro ao fazer a consulta de livros: ${error}`);

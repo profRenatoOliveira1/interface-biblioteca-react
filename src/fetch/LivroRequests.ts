@@ -1,5 +1,6 @@
 // Importa as configurações do servidor a partir de um arquivo externo
 import { SERVER_CFG } from "../appConfig";
+import LivroDTO from "../interfaces/LivroInterface";
 
 /**
  * Classe responsável por fazer as requisições relacionadas aos livros
@@ -29,7 +30,7 @@ class LivroRequests {
      * Método que faz uma requisição à API para buscar a lista de livros cadastrados
      * @returns Retorna um JSON com a lista de livros ou null em caso de erro
      */
-    async listarLivros(): Promise<JSON | null | undefined> {
+    async listarLivros(): Promise<LivroDTO | null> {
         try {
             // Faz a requisição GET para a rota da lista de livros
             const respostaAPI = await fetch(`${this.serverURL}${this.routeListaLivros}`);
@@ -37,11 +38,14 @@ class LivroRequests {
             // Verifica se a resposta da API foi bem-sucedida (status 200-299)
             if(respostaAPI.ok) {
                 // Converte a resposta para formato JSON
-                const listaDeLivros: JSON = await respostaAPI.json();
+                const listaDeLivros: LivroDTO = await respostaAPI.json();
 
                 // Retorna a lista de livros
                 return listaDeLivros;
             }
+
+            // retorna um valor nulo caso o servidor não envie a resposta
+            return null;
         } catch (error) {
             // Caso ocorra algum erro (ex: servidor fora do ar), exibe no console
             console.error(`Erro ao fazer a consulta de livros: ${error}`);
