@@ -40,14 +40,16 @@
 }
 
 .data-table :global(.p-paginator) {
-    padding: 1rem;
+    padding: 0.5rem;
     border-top: 1px solid #ddd;
-    justify-content: space-between;
+    justify-content: space-around;
     font-size: 0.9rem;
 }
 
 .data-table :global(.p-dropdown) {
     min-width: 80px;
+    text-align: center; 
+    align-items: center;
 }
 
 .data-table :global(.p-paginator .p-paginator-pages .p-paginator-page.p-highlight) {

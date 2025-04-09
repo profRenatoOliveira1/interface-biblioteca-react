@@ -4,7 +4,6 @@ import { JSX, useEffect, useState } from 'react'; // Hooks do React para trabalh
 // Importa os componentes da biblioteca PrimeReact
 import { DataTable } from 'primereact/datatable'; // Componente de tabela da biblioteca PrimeReact
 import { Column } from 'primereact/column'; // Componente de coluna da tabela
-import { Button } from 'primereact/button'; // Componente de botão da PrimeReact
 
 // Importa o serviço responsável pelas requisições relacionadas a alunos
 import AlunoRequests from '../../../fetch/AlunoRequests'; // Importa a classe responsável pelas requisições dos alunos
@@ -20,10 +19,6 @@ import AlunoDTO from '../../../interfaces/AlunoInterface';
 function TabelaAluno(): JSX.Element {
     // Hook useState: cria uma variável de estado chamada `alunos` para armazenar os dados dos alunos
     const [alunos, setAlunos] = useState<AlunoDTO[]>([]);
-
-    // Botões personalizados para a paginação da tabela (utilizado pelo componente DataTable da lib PrimeReact)
-    const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
-    const paginatorRight = <Button type="button" icon="pi pi-download" text />;
 
     /**
      * Hook useEffect: executa a função `fetchAlunos` assim que o componente for renderizado.
@@ -56,21 +51,20 @@ function TabelaAluno(): JSX.Element {
                 tableStyle={{ minWidth: '50rem' }} // Estilização mínima da tabela
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" // Template da paginação
                 currentPageReportTemplate="{first} de {last} total {totalRecords}" // Template do relatório da página
-                paginatorLeft={paginatorLeft} // Botão à esquerda da paginação
-                paginatorRight={paginatorRight} // Botão à direita da paginação
                 className={estilo['data-table']} // Classe CSS personalizada
             >
                 {/* Colunas da tabela, baseadas nos campos dos objetos de aluno */}
-                <Column field="nome" header="Nome" style={{ width: '15%' }} />
-                <Column field="sobrenome" header="Sobrenome" style={{ width: '15%' }} />
-                <Column field="endereco" header="Endereço" style={{ width: '20%' }} />
-                <Column field="email" header="E-mail" style={{ width: '20%' }} />
+                <Column field="nome" header="Nome" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '15%', color: 'var(--font-color)' }} />
+                <Column field="sobrenome" header="Sobrenome" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '15%', color: 'var(--font-color)' }} />
+                <Column field="endereco" header="Endereço" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '20%', color: 'var(--font-color)' }} />
+                <Column field="email" header="E-mail" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '20%', color: 'var(--font-color)' }} />
 
                 {/* Coluna personalizada para exibir a data formatada */}
                 <Column
                     field="dataNascimento"
                     header="Data Nascimento"
-                    style={{ width: '15%' }}
+                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}}
+                    style={{ width: '15%', color: 'var(--font-color)' }}
                     body={(rowData) => {
                         const data = new Date(rowData.dataNascimento);
                         const dia = String(data.getDate()).padStart(2, '0');
@@ -84,7 +78,8 @@ function TabelaAluno(): JSX.Element {
                 <Column
                     field="celular"
                     header="Celular"
-                    style={{ width: '15%' }}
+                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}}
+                    style={{ width: '15%', color: 'var(--font-color)' }}
                     body={(rowData) => {
                         const celular = rowData.celular?.replace(/\D/g, '');
                         if (!celular || celular.length < 10) return celular;

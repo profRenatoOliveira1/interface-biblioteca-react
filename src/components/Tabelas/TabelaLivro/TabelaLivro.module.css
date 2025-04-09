@@ -48,6 +48,8 @@
 
 .data-table :global(.p-dropdown) {
     min-width: 80px;
+    text-align: center; 
+    align-items: center;
 }
 
 .data-table :global(.p-paginator .p-paginator-pages .p-paginator-page.p-highlight) {

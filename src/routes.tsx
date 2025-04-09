@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { APP_ROUTES } from './appConfig';
 import PHome from './pages/PHome/PHome';
@@ -10,7 +11,7 @@ import PListagemLivros from './pages/PListagem/PListaLivros/PListaLivros';
  * Componente que irá lidar com todas as rotas da aplicação
  * @returns Um componente web para lidar com as rotas
  */
-function AppRoutes() {
+function AppRoutes(): JSX.Element {
     return (
         <BrowserRouter>
             <Routes>

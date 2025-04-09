@@ -4,7 +4,6 @@ import { JSX, useEffect, useState } from 'react'; // Hooks do React para trabalh
 // Importa os componentes da biblioteca PrimeReact
 import { DataTable } from 'primereact/datatable'; // Componente de tabela da biblioteca PrimeReact
 import { Column } from 'primereact/column'; // Componente de coluna da tabela
-import { Button } from 'primereact/button'; // Componente de botão da PrimeReact
 
 // Importa o serviço responsável pelas requisições relacionadas a empréstimos
 import EmprestimoRequests from '../../../fetch/EmprestimoRequests'; // Importa a classe responsável pelas requisições dos empréstimos
@@ -16,10 +15,6 @@ import EmprestimoDTO from '../../../interfaces/EmprestimoInterface';
 function TabelaEmprestimo(): JSX.Element {
     // Define o estado local para armazenar os dados dos empréstimos
     const [emprestimos, setEmprestimos] = useState<EmprestimoDTO[]>([]);
-
-    // Botões personalizados para a paginação da tabela (utilizado pelo componente DataTable da lib PrimeReact)
-    const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />; // Botão de "refresh" na esquerda
-    const paginatorRight = <Button type="button" icon="pi pi-download" text />; // Botão de "download" na direita
 
     // Hook useEffect para buscar os dados de empréstimos assim que o componente for montado
     useEffect(() => {
@@ -51,19 +46,18 @@ function TabelaEmprestimo(): JSX.Element {
                 tableStyle={{ minWidth: '50rem' }} // Estilização mínima da tabela
                 paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" // Template da paginação
                 currentPageReportTemplate="{first} de {last} total {totalRecords}" // Template do relatório da página
-                paginatorLeft={paginatorLeft} // Botão à esquerda da paginação
-                paginatorRight={paginatorRight} // Botão à direita da paginação
                 className={estilo['data-table']} // Classe CSS personalizada
             >
                 {/* Colunas da tabela, baseadas nos campos dos objetos de empréstimo */}
-                <Column field="aluno.nome" header="Aluno" style={{ width: '10%' }} /> {/* Nome do aluno */}
-                <Column field="livro.titulo" header="Livro" /> {/* Título do livro */}
+                <Column field="aluno.nome" header="Aluno" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '10%', color: 'var(--font-color)' }} /> {/* Nome do aluno */}
+                <Column field="livro.titulo" header="Livro" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ color: 'var(--font-color)' }}/> {/* Título do livro */}
 
                 {/* Coluna personalizada para exibir a data do empréstimo formatada */}
                 <Column
                     field="dataEmprestimo"
                     header="Data do emprétimo"
-                    style={{ width: '15%' }}
+                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}}
+                    style={{ width: '15%', color: 'var(--font-color)' }}
                     body={(rowData) => {
                         const data = new Date(rowData.dataEmprestimo); // Converte a string de data em objeto Date
                         const dia = String(data.getDate()).padStart(2, '0'); // Formata o dia com 2 dígitos
@@ -77,7 +71,8 @@ function TabelaEmprestimo(): JSX.Element {
                 <Column
                     field="dataDevolucao"
                     header="Data de devolução"
-                    style={{ width: '15%' }}
+                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}}
+                    style={{ width: '15%', color: 'var(--font-color)' }}
                     body={(rowData) => {
                         const data = new Date(rowData.dataDevolucao); // Converte a string de data em objeto Date
                         const dia = String(data.getDate()).padStart(2, '0'); // Formata o dia
@@ -88,7 +83,7 @@ function TabelaEmprestimo(): JSX.Element {
                 />
 
                 {/* Coluna com o status do empréstimo (ex: "pendente", "devolvido") */}
-                <Column field="statusEmprestimo" header="Status do empréstimo" style={{ width: '15%' }} />
+                <Column field="statusEmprestimo" header="Status do empréstimo" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '15%', color: 'var(--font-color)' }} />
             </DataTable>
         </main>
     );

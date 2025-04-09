@@ -20,7 +20,7 @@
 }
 
 .data-table :global(.p-datatable-thead > tr > th) {
-    background-color: #f4f4f5;
+    background-color: var(--cor-primaria);
     color: #333;
     font-weight: 600;
     text-align: left;
@@ -48,6 +48,8 @@
 
 .data-table :global(.p-dropdown) {
     min-width: 80px;
+    text-align: center; 
+    align-items: center;
 }
 
 .data-table :global(.p-paginator .p-paginator-pages .p-paginator-page.p-highlight) {
