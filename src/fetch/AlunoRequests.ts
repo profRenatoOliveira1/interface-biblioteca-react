@@ -64,7 +64,7 @@ class AlunoRequests {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formAluno)
+                body: formAluno
             });
 
             if(!respostaAPI.ok) {

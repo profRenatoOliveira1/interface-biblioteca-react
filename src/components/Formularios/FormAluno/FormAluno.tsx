@@ -17,6 +17,7 @@ function FormAluno() {
         setFormData({ ...formData, [nome]: valor });
     };
 
+    // função para recuperar dados do formulário e enviar para a requisição
     const handleSubmit = async (formData: { nome: string; sobrenome: string; dataNascimento: string; endereco: string; email: string; celular: string; }) => {
         const resposta = await AlunoRequests.enviaFormularioAluno(JSON.stringify(formData));
         if(resposta) {
