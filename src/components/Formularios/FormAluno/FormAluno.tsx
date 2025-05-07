@@ -20,7 +20,7 @@ function FormAluno() {
     // função para recuperar dados do formulário e enviar para a requisição
     const handleSubmit = async (formData: { nome: string; sobrenome: string; dataNascimento: string; endereco: string; email: string; celular: string; }) => {
         const resposta = await AlunoRequests.enviaFormularioAluno(JSON.stringify(formData));
-        if(resposta) {
+        if (resposta) {
             alert('Aluno cadastrado com sucesso.');
         } else {
             alert('Erro ao cadastrar aluno.');
@@ -31,8 +31,9 @@ function FormAluno() {
         <section className={estilo['sec-form-aluno']}>
             <h1>Cadastro Aluno</h1>
             <form action="post" onSubmit={(e) => { e.preventDefault(); handleSubmit(formData); }}
-                    className={estilo['form-aluno']}
-                >
+                className={estilo['form-aluno']}
+            >
+                <div className={estilo['input-group']}>
                     <label htmlFor="">
                         Nome
                         <input
@@ -56,7 +57,9 @@ function FormAluno() {
                             onChange={(e) => handleChange("sobrenome", e.target.value)}
                         />
                     </label>
+                </div>
 
+                <div className={estilo['input-group']}>
                     <label htmlFor="">
                         Data de Nascimento
                         <input
@@ -67,6 +70,20 @@ function FormAluno() {
                         />
                     </label>
 
+                    <label htmlFor="">
+                        Celular
+                        <input
+                            type="number"
+                            name="celular"
+                            id="celular"
+                            minLength={10}
+                            maxLength={13}
+                            onChange={(e) => handleChange("celular", e.target.value)}
+                        />
+                    </label>
+                </div>
+
+                <div className={estilo['input-group']}>
                     <label htmlFor="">
                         Endereço
                         <input
@@ -88,18 +105,7 @@ function FormAluno() {
                             onChange={(e) => handleChange("email", e.target.value)}
                         />
                     </label>
-
-                    <label htmlFor="">
-                        Celular
-                        <input
-                            type="number"
-                            name="celular"
-                            id="celular"
-                            minLength={10}
-                            maxLength={13}
-                            onChange={(e) => handleChange("celular", e.target.value)}
-                        />
-                    </label>
+                </div>
                 <input type="submit" value="ENVIAR" />
             </form>
         </section>

@@ -4,6 +4,7 @@
 
 .sec-form-aluno h1 {
     text-align: center;
+    margin-bottom: 2%;
 }
 
 .form-aluno {
@@ -30,4 +31,18 @@
     background-color: var(--cor-primaria);
     border: none;
     font-size: 1.15rem;
+    margin-top: 2%;
+    cursor: pointer;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.input-group label {
+    width: 48%;
 }
