@@ -11,6 +11,7 @@ import AlunoRequests from '../../../fetch/AlunoRequests'; // Importa a classe re
 // Importa o arquivo CSS com estilos específicos para este componente
 import estilo from './TabelaAluno.module.css'; // Importa os estilos específicos para este componente
 import AlunoDTO from '../../../interfaces/AlunoInterface';
+import { APP_ROUTES } from '../../../appConfig';
 
 /**
  * Componente que exibe uma tabela com os dados dos alunos.
@@ -41,6 +42,12 @@ function TabelaAluno(): JSX.Element {
         <main>
             {/* Título da tabela com classe personalizada */}
             <h1 className={estilo['header-tabela-aluno']}>Lista de Alunos</h1>
+            <a
+                href={APP_ROUTES.ROUTE_CADASTRO_ALUNO}
+                className={estilo['anc-pag-cadastro']}
+            >
+                CADASTRAR ALUNO
+            </a>
 
             {/* Componente DataTable: renderiza a tabela com os dados dos alunos */}
             <DataTable
@@ -54,16 +61,16 @@ function TabelaAluno(): JSX.Element {
                 className={estilo['data-table']} // Classe CSS personalizada
             >
                 {/* Colunas da tabela, baseadas nos campos dos objetos de aluno */}
-                <Column field="nome" header="Nome" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '15%', color: 'var(--font-color)' }} />
-                <Column field="sobrenome" header="Sobrenome" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '15%', color: 'var(--font-color)' }} />
-                <Column field="endereco" header="Endereço" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '20%', color: 'var(--font-color)' }} />
-                <Column field="email" header="E-mail" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '20%', color: 'var(--font-color)' }} />
+                <Column field="nome" header="Nome" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }} style={{ width: '15%', color: 'var(--font-color)' }} />
+                <Column field="sobrenome" header="Sobrenome" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }} style={{ width: '15%', color: 'var(--font-color)' }} />
+                <Column field="endereco" header="Endereço" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }} style={{ width: '20%', color: 'var(--font-color)' }} />
+                <Column field="email" header="E-mail" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }} style={{ width: '20%', color: 'var(--font-color)' }} />
 
                 {/* Coluna personalizada para exibir a data formatada */}
                 <Column
                     field="dataNascimento"
                     header="Data Nascimento"
-                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}}
+                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }}
                     style={{ width: '15%', color: 'var(--font-color)' }}
                     body={(rowData) => {
                         const data = new Date(rowData.dataNascimento);
@@ -78,7 +85,7 @@ function TabelaAluno(): JSX.Element {
                 <Column
                     field="celular"
                     header="Celular"
-                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}}
+                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }}
                     style={{ width: '15%', color: 'var(--font-color)' }}
                     body={(rowData) => {
                         const celular = rowData.celular?.replace(/\D/g, '');

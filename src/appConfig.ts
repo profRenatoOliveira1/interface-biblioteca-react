@@ -11,6 +11,8 @@ export const APP_ROUTES = {
     ROUTE_LISTAGEM_ALUNOS: '/alunos',
     ROUTE_LISTAGEM_EMPRESTIMOS: '/emprestimos',
     ROUTE_LISTAGEM_LIVROS: '/livros',
+
+    ROUTE_CADASTRO_ALUNO: '/cadastro/aluno'
 }
 
 /**

@@ -6,6 +6,7 @@ import PLogin from './pages/PLogin/PLogin';
 import PListaAlunos from './pages/PListagem/PListaAlunos/PListaAlunos';
 import PListaEmprestimos from './pages/PListagem/PListaEmprestimos/PListaEmprestimos';
 import PListagemLivros from './pages/PListagem/PListaLivros/PListaLivros';
+import PCadastroAluno from './pages/PCadastro/PCadastroAluno/PCadastroAluno';
 
 /**
  * Componente que irá lidar com todas as rotas da aplicação
@@ -26,6 +27,8 @@ function AppRoutes(): JSX.Element {
                 <Route path={APP_ROUTES.ROUTE_LISTAGEM_EMPRESTIMOS} element={<PListaEmprestimos />} />
                 {/* Quando a rota representada pela variável ROUTE_LISTAGEM_LIVROS é acessada, renderiza a página PListagemLivros */}
                 <Route path={APP_ROUTES.ROUTE_LISTAGEM_LIVROS} element={<PListagemLivros />} />
+            
+                <Route path={APP_ROUTES.ROUTE_CADASTRO_ALUNO} element={<PCadastroAluno />} />
             </Routes>
         </BrowserRouter>
     );
