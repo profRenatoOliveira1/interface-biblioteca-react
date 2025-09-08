@@ -59,6 +59,34 @@ class EmprestimoRequests {
             return null;
         }
     }
+
+    /**
+     * Envia os dados do formulário de empréstimo para a API
+     * @param formEmprestimo Objeto com os valores do formulário
+     * @returns **true** se cadastro com sucesso, **false** se falha
+     */
+    async enviaFormularioEmprestimo(formEmprestimo: object): Promise<boolean> {
+        const token = localStorage.getItem('token'); // recupera o token do localStorage
+        try {
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeCadastraEmprestimo}`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'x-access-token': `${token}`
+                },
+                body: JSON.stringify(formEmprestimo)
+            });
+
+            if(!respostaAPI.ok) {
+                throw new Error('Erro ao fazer requisiççao com o servidor.');
+            }
+
+            return true;
+        } catch (error) {
+            console.error(`Erro ao enviar formulário. ${error}`);
+            return false;
+        }
+    }
 }
 
 // Exporta a classe já instanciada, pronta para ser utilizada em outras partes do sistema

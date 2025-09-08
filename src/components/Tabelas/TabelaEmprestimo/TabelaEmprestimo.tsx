@@ -1,5 +1,6 @@
 // Importa os hooks e componentes necessários
 import { JSX, useEffect, useState } from 'react'; // Hooks do React para trabalhar com estado e efeitos colaterais
+import { APP_ROUTES } from '../../../appConfig';
 
 // Importa os componentes da biblioteca PrimeReact
 import { DataTable } from 'primereact/datatable'; // Componente de tabela da biblioteca PrimeReact
@@ -36,6 +37,12 @@ function TabelaEmprestimo(): JSX.Element {
         <main>
             {/* Título da tabela com classe personalizada */}
             <h1 className={estilo['header-tabela-emprestimo']}>Lista de Empréstimos</h1>
+            <a
+                href={APP_ROUTES.ROUTE_CADASTRO_EMPRESTIMO}
+                className={estilo['anc-pag-cadastro']}
+            >
+                CADASTRAR EMPRÉSTIMO
+            </a>
 
             {/* Componente DataTable: renderiza a tabela com os dados dos empréstimos */}
             <DataTable

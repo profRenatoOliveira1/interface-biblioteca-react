@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { JSX, useState } from 'react';
 import estilo from './FormAluno.module.css';
 import AlunoRequests from '../../../fetch/AlunoRequests';
 
-function FormAluno() {
+function FormAluno(): JSX.Element {
     const [formData, setFormData] = useState({
         nome: '',
         sobrenome: '',
