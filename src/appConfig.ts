@@ -1,5 +1,5 @@
-const API_SERVER_URL = import.meta.env.REACT_APP_API_SERVER_URL;
-const API_SERVER_PORT = import.meta.env.REACT_APP_API_SERVER_PORT;
+const API_SERVER_URL = import.meta.env.VITE_API_SERVER_URL;
+const API_SERVER_PORT = import.meta.env.VITE_API_SERVER_PORT;
 
 /**
  * Configuração de todas as rotas da interface web
@@ -26,5 +26,27 @@ export const APP_ROUTES = {
  * Qualquer alteração nos endpoints, no endereço do servidor ou porta que forem feitas lá deve ser replicada aqui
  */
 export const SERVER_CFG = {
-    SERVER_URL: `${API_SERVER_URL}:${API_SERVER_PORT}`
+    // endereço do servidor da API
+    SERVER_URL: `${API_SERVER_URL}:${API_SERVER_PORT}`,
+    
+    // endpoints de aluno
+    ENDPOINT_LISTAR_ALUNOS: '/lista/alunos',
+    ENDPOINT_CADASTRAR_ALUNO: '/novo/aluno',
+    ENDPOINT_ATUALIZAR_ALUNO: '/atualiza/aluno',
+    ENDPOINT_REMOVER_ALUNO: '/remove/aluno',
+
+    // endpoints de livro
+    ENDPOINT_LISTAR_LIVROS: '/lista/livros',
+    ENDPOINT_CADASTRAR_LIVRO: '/novo/livro',
+    ENDPOINT_ATUALIZAR_LIVRO: '/atualiza/livro',
+    ENDPOINT_REMOVER_LIVRO: '/remove/livro',
+
+    // endpoints de emprestimo
+    ENDPOINT_LISTAR_EMPRESTIMOS: '/lista/emprestimos',
+    ENDPOINT_CADASTRAR_EMPRESTIMO: '/novo/emprestimo',
+    ENDPOINT_ATUALIZAR_EMPRESTIMO: '/atualiza/emprestimo',
+    ENDPOINT_REMOVER_EMPRESTIMO: '/remove/emprestimo',
+
+    // endpoint de login
+    ENDPOINT_AUTH_LOGIN: '/login'
 }

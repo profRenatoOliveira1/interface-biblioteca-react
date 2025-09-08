@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 // Importa o componente de cabeçalho da aplicação
 import Cabecalho from "../../components/Cabecalho/Cabecalho";
 
@@ -8,7 +10,7 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 import Rodape from "../../components/Rodape/Rodape";
 
 // Componente funcional que representa a página de login
-function PLogin() {
+function PLogin(): JSX.Element {
     return (
         <div className="pagina-grid">
             {/* Renderiza o cabeçalho da página */}

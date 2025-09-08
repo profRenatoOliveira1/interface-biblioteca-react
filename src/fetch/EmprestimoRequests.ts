@@ -20,10 +20,10 @@ class EmprestimoRequests {
      */
     constructor() {
         this.serverURL = SERVER_CFG.SERVER_URL;               // Endereço do servidor web
-        this.routeListaEmprestimos = '/lista/emprestimos';    // Rota para buscar todos os empréstimos
-        this.routeCadastraEmprestimo = '/novo/emprestimo';    // Rota para cadastrar um novo empréstimo
-        this.routeAtualizaEmprestimo = '/atualiza/emprestimo';// Rota para atualizar um empréstimo existente
-        this.routeRemoveEmprestimo = '/remove/emprestimo';    // Rota para remover um empréstimo
+        this.routeListaEmprestimos = SERVER_CFG.ENDPOINT_LISTAR_EMPRESTIMOS;    // Rota para buscar todos os empréstimos
+        this.routeCadastraEmprestimo = SERVER_CFG.ENDPOINT_CADASTRAR_EMPRESTIMO;    // Rota para cadastrar um novo empréstimo
+        this.routeAtualizaEmprestimo = SERVER_CFG.ENDPOINT_ATUALIZAR_EMPRESTIMO;// Rota para atualizar um empréstimo existente
+        this.routeRemoveEmprestimo = SERVER_CFG.ENDPOINT_REMOVER_EMPRESTIMO;    // Rota para remover um empréstimo
     }
 
     /**
@@ -31,9 +31,14 @@ class EmprestimoRequests {
      * @returns Um objeto JSON contendo a lista de empréstimos, ou null em caso de erro
      */
     async listarEmprestimos(): Promise<EmprestimoDTO | null> {
+        const token = localStorage.getItem('token'); // recupera o token do localStorage
         try {
             // Envia a requisição para a rota de listagem de empréstimos
-            const respostaAPI = await fetch(`${this.serverURL}${this.routeListaEmprestimos}`);
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeListaEmprestimos}`, {
+                headers: {
+                    'x-access-token': `${token}`
+                }
+            });
 
             // Verifica se a resposta foi bem-sucedida (status HTTP 200-299)
             if (respostaAPI.ok) {

@@ -19,10 +19,10 @@ class AlunoRequests {
      */
     constructor() {
         this.serverURL = SERVER_CFG.SERVER_URL;     // Endereço do servidor web
-        this.routeListaAlunos = '/lista/alunos';    // Rota configurada na API
-        this.routeCadastraAluno = '/novo/aluno';    // Rota configurada na API
-        this.routeAtualizaAluno = '/atualiza/aluno'; // Rota configurada na API
-        this.routeRemoveAluno = '/remove/aluno';    // Rota configurada na API
+        this.routeListaAlunos = SERVER_CFG.ENDPOINT_LISTAR_ALUNOS;    // Rota configurada na API
+        this.routeCadastraAluno = SERVER_CFG.ENDPOINT_CADASTRAR_ALUNO;    // Rota configurada na API
+        this.routeAtualizaAluno = SERVER_CFG.ENDPOINT_ATUALIZAR_ALUNO; // Rota configurada na API
+        this.routeRemoveAluno = SERVER_CFG.ENDPOINT_REMOVER_ALUNO;    // Rota configurada na API
     }
 
     /**
@@ -30,9 +30,14 @@ class AlunoRequests {
      * @returns Retorna um JSON com a lista de alunos ou null em caso de erro
      */
     async listarAlunos(): Promise<AlunoDTO | null> {
+        const token = localStorage.getItem('token'); // recupera o token do localStorage
         try {
             // faz a requisição no servidor
-            const respostaAPI = await fetch(`${this.serverURL}${this.routeListaAlunos}`);
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeListaAlunos}`, {
+                headers: {
+                    'x-access-token': `${token}`
+                }
+            });
 
             // Verifica se a resposta foi bem-sucedida (status HTTP 200-299)
             if (respostaAPI.ok) {
@@ -40,10 +45,9 @@ class AlunoRequests {
                 const listaDeAlunos: AlunoDTO = await respostaAPI.json();
                 // retorna a resposta
                 return listaDeAlunos;
+            } else {
+                throw new Error("Não foi possível listar os alunos");
             }
-            
-            // retorna um valor nulo caso o servidor não envie a resposta
-            return null;
         } catch (error) {
             // exibe detalhes do erro no console
             console.error(`Erro ao fazer a consulta de alunos: ${error}`);
@@ -58,11 +62,13 @@ class AlunoRequests {
      * @returns **true** se cadastro com sucesso, **false** se falha
      */
     async enviaFormularioAluno(formAluno: string): Promise<boolean> {
+        const token = localStorage.getItem('token'); // recupera o token do localStorage
         try {
             const respostaAPI = await fetch(`${this.serverURL}${this.routeCadastraAluno}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'x-access-token': `${token}`
                 },
                 body: formAluno
             });

@@ -20,10 +20,10 @@ class LivroRequests {
      */
     constructor() {
         this.serverURL = SERVER_CFG.SERVER_URL;         // Endereço do servidor web
-        this.routeListaLivros = '/lista/livros';        // Define a rota para listar os livros
-        this.routeCadastraLivro = '/novo/livro';        // Define a rota para cadastrar livros
-        this.routeAtualizaLivro = '/atualiza/livro';    // Define a rota para atualizar livros
-        this.routeRemoveLivro = '/remove/livro';        // Define a rota para remover livros
+        this.routeListaLivros = SERVER_CFG.ENDPOINT_LISTAR_LIVROS;        // Define a rota para listar os livros
+        this.routeCadastraLivro = SERVER_CFG.ENDPOINT_CADASTRAR_LIVRO;    // Define a rota para cadastrar livros
+        this.routeAtualizaLivro = SERVER_CFG.ENDPOINT_ATUALIZAR_LIVRO;    // Define a rota para atualizar livros
+        this.routeRemoveLivro = SERVER_CFG.ENDPOINT_REMOVER_LIVRO;        // Define a rota para remover livros
     }
 
     /**
@@ -31,9 +31,14 @@ class LivroRequests {
      * @returns Retorna um JSON com a lista de livros ou null em caso de erro
      */
     async listarLivros(): Promise<LivroDTO | null> {
+        const token = localStorage.getItem('token'); // recupera o token do localStorage
         try {
             // Faz a requisição GET para a rota da lista de livros
-            const respostaAPI = await fetch(`${this.serverURL}${this.routeListaLivros}`);
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeListaLivros}`, {
+                headers: {
+                    'x-access-token': `${token}`
+                }
+            });
         
             // Verifica se a resposta da API foi bem-sucedida (status 200-299)
             if(respostaAPI.ok) {
@@ -56,11 +61,13 @@ class LivroRequests {
     }
 
     async enviaFormularioLivro(formLivro: string): Promise<boolean> {
+        const token = localStorage.getItem('token'); // recupera o token do localStorage
         try {
             const respostaAPI = await fetch(`${this.serverURL}${this.routeCadastraLivro}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'x-access-token': `${token}`
                 },
                 body: formLivro
             });

@@ -1,5 +1,7 @@
 // Importa o tipo JSX do React para definir o tipo de retorno do componente
-import { JSX } from 'react';
+import { JSX, useEffect, useState } from 'react';
+import { Button } from 'primereact/button';
+import AuthRequests from '../../fetch/AuthRequests';
 
 // Importa os estilos CSS específicos para o componente de cabeçalho
 import estilo from './Cabecalho.module.css';
@@ -12,27 +14,65 @@ import { APP_ROUTES } from '../../appConfig';
 
 // Declara o componente funcional Cabecalho que retorna um elemento JSX
 function Cabecalho(): JSX.Element {
+    // estado para controlar a renderização condicional
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const isAuth: boolean = localStorage.getItem('isAuth') === 'true'; // recupera o valor isAuth do localStorage e converte em um boolean
+        const token: string | null = localStorage.getItem('token'); // recupera o valor do token do localStorage
+        // verifica se isAuth é verdadeiro, se o token não é nulo e se o token não está expirado
+        if (isAuth && token && AuthRequests.checkTokenExpiry()) {
+            setIsAuthenticated(true); // define o estado para verdadeiro
+        } else {
+            setIsAuthenticated(false); // define o estado para falso
+        }
+    }, []);
+
     return (
         // Define o cabeçalho da aplicação com uma classe CSS personalizada
         <header className={estilo.cabecalho}>
-            
+
             {/* Link para navegar até a ROUTE_HOME quando clicar na imagem */}
             <a href={APP_ROUTES.ROUTE_HOME} className={estilo.imgLogo}>
                 {/* Logotipo da aplicação */}
                 <img src={logotipo} alt="logotipo" />
             </a>
 
-            {/* Link para navegar até a listagem de alunos */}
-            <a href={APP_ROUTES.ROUTE_LISTAGEM_ALUNOS}>Alunos</a>
+            {isAuthenticated ? (
+                <>
+                    {/* Link para navegar até a listagem de alunos */}
+                    <a href={APP_ROUTES.ROUTE_LISTAGEM_ALUNOS}>Alunos</a>
 
-            {/* Link para navegar até a listagem de livros */}
-            <a href={APP_ROUTES.ROUTE_LISTAGEM_LIVROS}>Livros</a>
+                    {/* Link para navegar até a listagem de livros */}
+                    <a href={APP_ROUTES.ROUTE_LISTAGEM_LIVROS}>Livros</a>
 
-            {/* Link para navegar até a listagem de empréstimos */}
-            <a href={APP_ROUTES.ROUTE_LISTAGEM_EMPRESTIMOS}>Empréstimos</a>
+                    {/* Link para navegar até a listagem de empréstimos */}
+                    <a href={APP_ROUTES.ROUTE_LISTAGEM_EMPRESTIMOS}>Empréstimos</a>
 
-            {/* Link para navegar até a página de login */}
-            <a href={APP_ROUTES.ROUTE_LOGIN}>Login</a>
+                    {/* Link para navegar até a página de login */}
+                    <Button
+                        className='btn-sair-personalizado'
+                        style={{
+                            width: '10%',
+                            height: '50%',
+                            color: 'var(--cor-primaria)',
+                            backgroundColor: '#fff',
+                            marginRight: '2%',
+                            textAlign: 'center',
+                            fontWeight: 'bold',
+                            fontSize: '1.2rem'
+                        }}
+                        label='Sair'
+                        raised
+                        onClick={() => { AuthRequests.removeToken() }}
+                    />
+                </>
+            ) : (
+                <>
+                    {/* Link para navegar até a página de login */}
+                    <a href={APP_ROUTES.ROUTE_LOGIN}>Login</a>
+                </>
+            )}
         </header>
     );
 }
