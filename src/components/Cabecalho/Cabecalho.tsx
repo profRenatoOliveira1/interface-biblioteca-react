@@ -51,17 +51,6 @@ function Cabecalho(): JSX.Element {
 
                     {/* Link para navegar até a página de login */}
                     <Button
-                        className='btn-sair-personalizado'
-                        style={{
-                            width: '10%',
-                            height: '50%',
-                            color: 'var(--cor-primaria)',
-                            backgroundColor: '#fff',
-                            marginRight: '2%',
-                            textAlign: 'center',
-                            fontWeight: 'bold',
-                            fontSize: '1.2rem'
-                        }}
                         label='Sair'
                         raised
                         onClick={() => { AuthRequests.removeToken() }}
