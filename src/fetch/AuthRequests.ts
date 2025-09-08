@@ -25,8 +25,6 @@ class AuthRequests {
      */
     async login(login: { username: string, senha: string}) {       
         try {
-            console.info(`${this.serverUrl}${this.routeLogin}`);
-
             // faz a requisição POST ao servidor...
             const response = await fetch(`${this.serverUrl}${this.routeLogin}`, {
                 method: 'POST',
