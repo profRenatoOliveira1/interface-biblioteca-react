@@ -1,3 +1,6 @@
+const API_SERVER_URL = import.meta.env.REACT_APP_API_SERVER_URL;
+const API_SERVER_PORT = import.meta.env.REACT_APP_API_SERVER_PORT;
+
 /**
  * Configuração de todas as rotas da interface web
  * Todas os endereços das páginas devem ser inseridas em APP_ROUTES
@@ -23,5 +26,5 @@ export const APP_ROUTES = {
  * Qualquer alteração nos endpoints, no endereço do servidor ou porta que forem feitas lá deve ser replicada aqui
  */
 export const SERVER_CFG = {
-    SERVER_URL: 'http://localhost:3333'
+    SERVER_URL: `${API_SERVER_URL}:${API_SERVER_PORT}`
 }
