@@ -28,7 +28,7 @@ export const APP_ROUTES = {
  */
 export const SERVER_CFG = {
     // endereço do servidor da API
-    SERVER_URL: `${API_SERVER_URL}:${API_SERVER_PORT}`,
+    SERVER_URL: `${API_SERVER_URL}`,
     
     // endpoints de aluno
     ENDPOINT_LISTAR_ALUNOS: '/lista/alunos',

@@ -43,6 +43,13 @@
     border-radius: 5px;
 
     background-color: var(--input-bg);
+    color: #0e0e0e;
+}
+
+.input-email-login::placeholder,
+.input-password-login::placeholder {
+    background-color: var(--input-bg);
+    color: #0e0e0e;
 }
 
 .input-button-login {
