@@ -5,6 +5,7 @@ import AlunoRequests from "../../../fetch/AlunoRequests";
 import LivroDTO from "../../../interfaces/LivroInterface";
 import LivroRequests from "../../../fetch/LivroRequests";
 import { STATUS_EMPRESTIMO } from "../../../appConfig";
+import EmprestimoRequests from "../../../fetch/EmprestimoRequests";
 
 function FormEmprestimo(): JSX.Element {
     const [statusEmprestimo, setStatusEmprestimo] = useState<string[]>([]);
@@ -45,17 +46,49 @@ function FormEmprestimo(): JSX.Element {
         setStatusEmprestimo(Object.values(STATUS_EMPRESTIMO));
     }, []);
 
+    /**
+     * Função para enviar o formulário
+     */
+    const handleSubmit = async (formData: {
+        idAluno: number, idLivro: number, dataEmprestimo: string, dataDevolucao: string,
+        statusEmprestimo: string
+    }) => {
+        if(new Date(formData.dataDevolucao) <= new Date(formData.dataEmprestimo)) {
+            alert("A data de devolução não deve ser anterior à data de empréstimo.");
+            return;
+        }
+
+        const resposta = await EmprestimoRequests.enviaFormularioEmprestimo(formData);
+        resposta ?
+            alert("Empréstimo cadastrado com sucesso!") :
+            alert("Erro ao cadastrar o empréstimo")
+    }
+
+    const handleChange = (e: any) => {
+        const { nome, valor } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [nome]: valor
+        }));
+    }
+
     return (
         <section className={estilo['sec-form-emprestimo']}>
             <h1>Cadastro de Empréstimo</h1>
 
             <form action="" method="post"
-                className={estilo['form-emprestimo']}>
+                className={estilo['form-emprestimo']}
+                onSubmit={(e) => { e.preventDefault(); handleSubmit(formData) }}>
 
                 {/* SELECT e OPTIONS */}
                 <label htmlFor="">
                     Aluno
-                    <select name="" id="">
+                    <select 
+                        value={formData.idAluno}
+                        onChange={handleChange}
+                        name="idAluno"
+                        required
+                        >
                         {/* Montando as OPTIONS */}
                         <option value="">Selecione o aluno</option>
                         {alunos.map(aluno => (
@@ -68,7 +101,11 @@ function FormEmprestimo(): JSX.Element {
 
                 <label htmlFor="">
                     Livro
-                    <select name="" id="">
+                    <select 
+                        value={formData.idLivro}
+                        onChange={handleChange}
+                        name="idLivro"
+                        required>
                         <option value="">Selecione o livro</option>
                         {livros.map(livro => (
                             <option key={livro.idLivro} value={livro.idLivro}>
@@ -83,7 +120,10 @@ function FormEmprestimo(): JSX.Element {
                     <input
                         type="date"
                         name="dataEmprestimo"
-                        id="dataEmprestimo" />
+                        id="dataEmprestimo"
+                        value={formData.dataEmprestimo}
+                        onChange={handleChange}
+                        required />
                 </label>
 
                 <label htmlFor="">
@@ -91,12 +131,20 @@ function FormEmprestimo(): JSX.Element {
                     <input
                         type="date"
                         name="dataDevolucao"
-                        id="dataDevolucao" />
+                        id="dataDevolucao"
+                        value={formData.dataDevolucao}
+                        onChange={handleChange}
+                        required />
                 </label>
 
                 <label htmlFor="">
                     Status do empréstimo
-                    <select name="" id="">
+                    <select 
+                        value={formData.statusEmprestimo}
+                        onChange={handleChange}
+                        name="statusEmprestimo"
+                        required
+                    >
                         <option value="">Selecione o status do empréstimo</option>
                         {statusEmprestimo.map((status, id) => (
                             <option key={id} value={status}>
@@ -105,6 +153,8 @@ function FormEmprestimo(): JSX.Element {
                         ))}
                     </select>
                 </label>
+
+                <input type="submit" value="ENVIAR" />
             </form>
         </section>
     );
