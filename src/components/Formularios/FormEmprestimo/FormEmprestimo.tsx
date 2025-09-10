@@ -65,10 +65,10 @@ function FormEmprestimo(): JSX.Element {
     }
 
     const handleChange = (e: any) => {
-        const { nome, valor } = e.target;
+        const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState,
-            [nome]: valor
+            [name]: value
         }));
     }
 
