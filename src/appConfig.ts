@@ -17,6 +17,7 @@ export const APP_ROUTES = {
 
     ROUTE_CADASTRO_ALUNO: '/cadastro/aluno',
     ROUTE_CADASTRO_LIVRO: '/cadastro/livro',
+    ROUTE_CADASTRO_EMPRESTIMO: '/cadastro/emprestimo'
 }
 
 /**
@@ -49,4 +50,11 @@ export const SERVER_CFG = {
 
     // endpoint de login
     ENDPOINT_AUTH_LOGIN: '/login'
+}
+
+/** Enumeração dos status do empréstimo */
+export const STATUS_EMPRESTIMO = {
+    STATUS_EM_ANDAMENTO: 'Em andamento',
+    STATUS_CONCLUIDO: 'Concluído',
+    STATUS_ATRASADO: 'Atrasado'
 }
