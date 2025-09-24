@@ -74,7 +74,7 @@ class AlunoRequests {
             });
 
             if(!respostaAPI.ok) {
-                throw new Error('Erro ao fazer requisição com o servidor.');
+                throw new Error('Erro ao fazer requisição para o servidor.');
             }
 
             return true;
@@ -107,6 +107,35 @@ class AlunoRequests {
             return true;
         } catch (error) {
             console.error(`Erro ao remover aluno. ${error}`);
+            return false;
+        }
+    }
+
+    /**
+     * Envia os dados de atualização do formulário aluno para a API
+     * @param formAluno Objeto com os valores do formulário
+     * @returns **true** se cadastro com sucesso, **false** se falha
+     */
+    async enviarFormularioAtualizacaoAluno(formAluno: AlunoDTO): Promise<boolean> {
+        const token = localStorage.getItem('token');
+
+        try {
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeAtualizaAluno}?idAluno=${formAluno.idAluno}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'x-access-token': `${token}`
+                },
+                body: JSON.stringify(formAluno)
+            });
+
+            if(!respostaAPI.ok) {
+                throw new Error('Erro ao fazer requisição para o servidor.');
+            }
+
+            return true;
+        } catch (error) {
+            console.error(`Erro ao enviar o formulário. ${error}`);
             return false;
         }
     }
