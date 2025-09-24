@@ -83,6 +83,33 @@ class AlunoRequests {
             return false;
         }
     }
+
+    /**
+     * Envia requisição para a API solicitando a remoção de um recurso
+     * @param idAluno ID do aluno a ser removido
+     * @returns **true** se cadastro com sucesso, **false** se falha
+     */
+    async removerAluno(idAluno: number): Promise<boolean> {
+        const token = localStorage.getItem('token');
+        try {
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeRemoveAluno}?idAluno=${idAluno}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': `${token}`
+                }
+            });
+
+            if(!respostaAPI.ok) {
+                throw new Error('Erro ao fazer requisição com o servidor.');
+            }
+
+            return true;
+        } catch (error) {
+            console.error(`Erro ao remover aluno. ${error}`);
+            return false;
+        }
+    }
 }
 
 // Exporta a classe já instanciando um objeto da mesma
