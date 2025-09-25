@@ -9,6 +9,7 @@ class AlunoRequests {
 
     private serverURL: string;          // Variável para o endereço do servidor
     private routeListaAlunos: string;   // Variável para a rota de listagem de alunos
+    private routeListaAluno: string;   // Variável para a rota de listagem de aluno
     private routeCadastraAluno: string; // Variável para a rota de cadastro de aluno
     private routeAtualizaAluno: string; // Variável para a rota de atualiação de aluno
     private routeRemoveAluno: string;   // Variável para a rota de remoção do aluno
@@ -20,6 +21,7 @@ class AlunoRequests {
     constructor() {
         this.serverURL = SERVER_CFG.SERVER_URL;     // Endereço do servidor web
         this.routeListaAlunos = SERVER_CFG.ENDPOINT_LISTAR_ALUNOS;    // Rota configurada na API
+        this.routeListaAluno = SERVER_CFG.ENDPOINT_LISTAR_ALUNO;    // Rota configurada na API
         this.routeCadastraAluno = SERVER_CFG.ENDPOINT_CADASTRAR_ALUNO;    // Rota configurada na API
         this.routeAtualizaAluno = SERVER_CFG.ENDPOINT_ATUALIZAR_ALUNO; // Rota configurada na API
         this.routeRemoveAluno = SERVER_CFG.ENDPOINT_REMOVER_ALUNO;    // Rota configurada na API
@@ -52,6 +54,34 @@ class AlunoRequests {
             // exibe detalhes do erro no console
             console.error(`Erro ao fazer a consulta de alunos: ${error}`);
             // retorna um valor nulo
+            return null;
+        }
+    }
+
+    async consultarAluno(idAluno: number): Promise<AlunoDTO | null> {
+        const token = localStorage.getItem('token');
+
+        try {
+            console.log('fazendo consulta');
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeListaAluno}?idAluno=${idAluno}`, {
+                headers: {
+                    'x-access-token': `${token}`
+                }
+            });
+
+            console.log('resposta: ' + JSON.stringify(respostaAPI));
+
+            // Verifica se a resposta foi bem-sucedida (status HTTP 200-299)
+            if (respostaAPI.ok) {
+                // converte a reposta para um JSON
+                const aluno: AlunoDTO = await respostaAPI.json();
+                // retorna a resposta
+                return aluno;
+            } else {
+                throw new Error("Não foi possível listar os alunos");
+            }
+        } catch (error) {
+            console.error(`Erro ao fazer a consulta de aluno: ${error}`);
             return null;
         }
     }

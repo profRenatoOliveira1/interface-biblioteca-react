@@ -122,7 +122,7 @@ function TabelaAluno(): JSX.Element {
                         <>
                             <button 
                                 style={{ width: '100%' }}
-                                onClick={() => alert(`Atualizar ${rowdata.idAluno}`)}
+                                onClick={() => window.location.href = `/atualizar/aluno/${rowdata.idAluno}`}
                             >
                                 Atualizar
                             </button>
