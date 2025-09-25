@@ -46,3 +46,10 @@
 .input-group label {
     width: 48%;
 }
+
+.input-field {
+    background-color: #3c3c3c;
+    border: 2px solid #5e5e5e;
+    border-radius: 5px;
+    height: 4vh!important;
+}

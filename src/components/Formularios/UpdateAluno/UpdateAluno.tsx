@@ -1,7 +1,9 @@
 import { JSX } from "react";
 import { useEffect, useState } from "react";
+import { InputMask } from 'primereact/inputmask';
 import AlunoRequests from "../../../fetch/AlunoRequests";
 import estilo from './UpdateAluno.module.css';
+import { formatarCelular } from '../../../util/FormatValues';
 
 function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
     const [formData, setFormData] = useState({
@@ -28,7 +30,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                             : '',
                         endereco: aluno.endereco || '',
                         email: aluno.email || '',
-                        celular: aluno.celular || ''
+                        celular: aluno.celular ? formatarCelular(aluno.celular) : ''
                     }); // Atualiza o estado com os dados
                 }
             } catch (error) {
@@ -69,6 +71,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                     <label htmlFor="">
                         Nome
                         <input
+                            className={estilo['input-field']}
                             type="text"
                             name="nome"
                             id="nome"
@@ -82,6 +85,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                     <label htmlFor="">
                         Sobrenome
                         <input
+                            className={estilo['input-field']}
                             type="text"
                             name="sobrenome"
                             id="sobrenome"
@@ -97,6 +101,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                     <label htmlFor="">
                         Data de Nascimento
                         <input
+                            className={estilo['input-field']}
                             type="date"
                             name="dataNascimento"
                             id="dataNascimento"
@@ -105,7 +110,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                         />
                     </label>
 
-                    <label htmlFor="">
+                    {/* <label htmlFor="">
                         Celular
                         <input
                             type="number"
@@ -116,6 +121,32 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                             maxLength={13}
                             onChange={(e) => handleChange("celular", e.target.value)}
                         />
+                    </label> */}
+                    <label htmlFor="">
+                        Celular
+                        {formData.celular ? (
+                            <InputMask
+                                className={estilo['input-field']}
+                                key={formData.celular}
+                                mask="(99) 9 9999-9999"
+                                placeholder="(16) 9 1234-5678"
+                                name="celular"
+                                id="celular"
+                                value={formData.celular}
+                                onChange={(e) => handleChange("celular", e.target.value ?? "")}
+                            />
+                        ) : (
+                            <InputMask
+                                className={estilo['input-field']}
+                                key={formData.celular}
+                                mask="(99) 9 9999-9999"
+                                placeholder="(16) 9 1234-5678"
+                                name="celular"
+                                id="celular"
+                                value=""
+                                onChange={(e) => handleChange("celular", e.target.value ?? "")}
+                            />
+                        )}
                     </label>
                 </div>
 
@@ -123,6 +154,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                     <label htmlFor="">
                         Endereço
                         <input
+                            className={estilo['input-field']}
                             type="text"
                             name="endereco"
                             id="endereco"
@@ -135,6 +167,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                     <label htmlFor="">
                         E-mail
                         <input
+                            className={estilo['input-field']}
                             type="email"
                             name="email"
                             id="email"

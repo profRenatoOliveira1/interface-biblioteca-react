@@ -1,4 +1,5 @@
 import { JSX, useState } from 'react';
+import { InputMask } from 'primereact/inputmask';
 import estilo from './FormAluno.module.css';
 import AlunoRequests from '../../../fetch/AlunoRequests';
 
@@ -19,7 +20,15 @@ function FormAluno(): JSX.Element {
 
     // função para recuperar dados do formulário e enviar para a requisição
     const handleSubmit = async (formData: { nome: string; sobrenome: string; dataNascimento: string; endereco: string; email: string; celular: string; }) => {
-        const resposta = await AlunoRequests.enviaFormularioAluno(JSON.stringify(formData));
+        const celularLimpo = formData.celular.replace(/\D/g, '');
+        const formDataToSend = {
+            ...formData,
+            celular: celularLimpo,
+            dataNascimento: formData.dataNascimento ? new Date(formData.dataNascimento) : undefined
+        };
+
+        const resposta = await AlunoRequests.enviaFormularioAluno(JSON.stringify(formDataToSend));
+
         if (resposta) {
             alert('Aluno cadastrado com sucesso.');
         } else {
@@ -37,6 +46,7 @@ function FormAluno(): JSX.Element {
                     <label htmlFor="">
                         Nome
                         <input
+                            className={estilo['input-field']}
                             type="text"
                             name="nome"
                             id="nome"
@@ -49,6 +59,7 @@ function FormAluno(): JSX.Element {
                     <label htmlFor="">
                         Sobrenome
                         <input
+                            className={estilo['input-field']}
                             type="text"
                             name="sobrenome"
                             id="sobrenome"
@@ -63,6 +74,7 @@ function FormAluno(): JSX.Element {
                     <label htmlFor="">
                         Data de Nascimento
                         <input
+                            className={estilo['input-field']}
                             type="date"
                             name="dataNascimento"
                             id="dataNascimento"
@@ -72,13 +84,15 @@ function FormAluno(): JSX.Element {
 
                     <label htmlFor="">
                         Celular
-                        <input
-                            type="number"
-                            name="celular"
-                            id="celular"
+                        <InputMask
+                            className={estilo['input-field']}
+                            mask="(99) 9 9999-9999"
+                            placeholder="(16) 9 1234-5678"
+                            name='celular'
+                            id='celular'
                             minLength={10}
                             maxLength={13}
-                            onChange={(e) => handleChange("celular", e.target.value)}
+                            onChange={(e) => handleChange("celular", e.target.value ?? "")}
                         />
                     </label>
                 </div>
@@ -87,6 +101,7 @@ function FormAluno(): JSX.Element {
                     <label htmlFor="">
                         Endereço
                         <input
+                            className={estilo['input-field']}
                             type="text"
                             name="endereco"
                             id="endereco"
@@ -98,6 +113,7 @@ function FormAluno(): JSX.Element {
                     <label htmlFor="">
                         E-mail
                         <input
+                            className={estilo['input-field']}
                             type="email"
                             name="email"
                             id="email"
