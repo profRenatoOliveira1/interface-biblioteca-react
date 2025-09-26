@@ -56,8 +56,12 @@ function TabelaEmprestimo(): JSX.Element {
                 currentPageReportTemplate="{first} de {last} total {totalRecords}" // Template do relatório da página
                 className={estilo['data-table']} // Classe CSS personalizada
             >
-                {/* Colunas da tabela, baseadas nos campos dos objetos de empréstimo */}
-                <Column field="aluno.nome" header="Aluno" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '10%', color: 'var(--font-color)' }} /> {/* Nome do aluno */}
+                <Column
+                    header="Aluno"
+                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }}
+                    style={{ width: '15%', color: 'var(--font-color)' }}
+                    body={(rowData) => `${rowData.aluno.nome} ${rowData.aluno.sobrenome}`}
+                />{/* Nome do aluno */}
                 <Column field="livro.titulo" header="Livro" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ color: 'var(--font-color)' }}/> {/* Título do livro */}
 
                 {/* Coluna personalizada para exibir a data do empréstimo formatada */}
