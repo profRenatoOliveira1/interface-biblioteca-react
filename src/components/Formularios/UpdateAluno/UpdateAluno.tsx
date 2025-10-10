@@ -45,12 +45,19 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
     };
 
     // função para recuperar dados do formulário e enviar para a requisição
-    const handleSubmit = async (formData: { nome: string; sobrenome: string; dataNascimento: string; endereco: string; email: string; celular: string; }) => {
-        const resposta = await AlunoRequests.enviaFormularioAluno(JSON.stringify(formData));
+    const handleSubmit = async (formData: { idAluno: number, nome: string; sobrenome: string; dataNascimento: string; endereco: string; email: string; celular: string; }) => {
+        // Converte a data para enviar o formulário
+        const formDataToSend = {
+            ...formData,
+            dataNascimento: formData.dataNascimento ? 
+                new Date(formData.dataNascimento) : undefined
+        }
+        
+        const resposta = await AlunoRequests.enviarFormularioAtualizacaoAluno(formDataToSend);
         if (resposta) {
-            alert('Aluno cadastrado com sucesso.');
+            alert('Aluno atualizado com sucesso.');
         } else {
-            alert('Erro ao cadastrar aluno.');
+            alert('Erro ao atualizado aluno.');
         }
     }
 

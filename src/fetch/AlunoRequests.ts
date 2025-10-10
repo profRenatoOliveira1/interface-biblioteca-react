@@ -9,7 +9,7 @@ class AlunoRequests {
 
     private serverURL: string;          // Variável para o endereço do servidor
     private routeListaAlunos: string;   // Variável para a rota de listagem de alunos
-    private routeListaAluno: string;   // Variável para a rota de listagem de alunos
+    private routeListaAluno: string;   // Variável para a rota de listagem de aluno
     private routeCadastraAluno: string; // Variável para a rota de cadastro de aluno
     private routeAtualizaAluno: string; // Variável para a rota de atualiação de aluno
     private routeRemoveAluno: string;   // Variável para a rota de remoção do aluno
@@ -141,8 +141,7 @@ class AlunoRequests {
 
         try {
             const respostaAPI = 
-            await fetch(`${this.serverURL}${this.routeAtualizaAluno}
-                ?idAluno=${formAluno.idAluno}`, {
+            await fetch(`${this.serverURL}${this.routeAtualizaAluno}?idAluno=${formAluno.idAluno}`, {
                     method: 'PUT',
                     headers: {
                         'Content-type': 'application/json',

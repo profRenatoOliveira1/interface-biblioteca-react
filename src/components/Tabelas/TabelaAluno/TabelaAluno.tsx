@@ -119,6 +119,10 @@ function TabelaAluno(): JSX.Element {
                                 style={{ width: '100%' }}
                                 onClick={() => deletar(rowdata)}
                             >Deletar</button>
+                            <button
+                                style={{ width: '100%' }}
+                                onClick={() => window.location.href=`/atualizar/aluno/${rowdata.idAluno}`}
+                            >Atualizar</button>
                         </>
                     )}
                 />
