@@ -18,17 +18,22 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
         const fetchAlunos = async () => {  // função para obter dados do aluno
             try {
                 const aluno = await AlunoRequests.consultaAluno(formData.idAluno);
+                console.log(aluno);
+                
                 if (aluno) {
                     setFormData({
                         idAluno: formData.idAluno,
                         nome: aluno.nome || '',
                         sobrenome: aluno.sobrenome || '',
-                        dataNascimento: aluno.dataNascimento?.toISOString() || '',
+                        dataNascimento: aluno.dataNascimento ? 
+                            new Date(aluno.dataNascimento).toISOString().slice(0, 10) : '',
                         endereco: aluno.endereco || '',
                         email: aluno.email || '',
                         celular: aluno.celular || ''
                     });
                 }
+
+                console.log(JSON.stringify(formData));
             } catch (error) {
                 console.error(`Erro ao buscar dados do aluno. ${error}`);
             }

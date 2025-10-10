@@ -34,6 +34,7 @@ export const SERVER_CFG = {
     
     // endpoints de aluno
     ENDPOINT_LISTAR_ALUNOS: '/lista/alunos',
+    ENDPOINT_LISTAR_ALUNO: '/lista/aluno',
     ENDPOINT_CADASTRAR_ALUNO: '/novo/aluno',
     ENDPOINT_ATUALIZAR_ALUNO: '/atualiza/aluno',
     ENDPOINT_REMOVER_ALUNO: '/remove/aluno',
