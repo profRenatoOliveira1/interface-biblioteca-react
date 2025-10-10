@@ -58,25 +58,30 @@ class AlunoRequests {
         }
     }
 
-    async consultaAluno(idAluno: number): Promise<AlunoDTO | null> {
+    async consultarAluno(idAluno: number): Promise<AlunoDTO | null> {
         const token = localStorage.getItem('token');
-        try {
-            const respostaAPI = await fetch(`
-                ${this.serverURL}${this.routeListaAluno}?idAluno=${idAluno}`, {
-                    headers: {
-                        'x-access-token': `${token}`
-                    }
-                });
 
-                if(respostaAPI.ok) {
-                    const aluno: AlunoDTO = await respostaAPI.json();
-                    console.log(aluno);
-                    return aluno;
-                } else {
-                    throw new Error(`Não foi possível recuperar o aluno.`);
+        try {
+            console.log('fazendo consulta');
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeListaAluno}?idAluno=${idAluno}`, {
+                headers: {
+                    'x-access-token': `${token}`
                 }
+            });
+
+            console.log('resposta: ' + JSON.stringify(respostaAPI));
+
+            // Verifica se a resposta foi bem-sucedida (status HTTP 200-299)
+            if (respostaAPI.ok) {
+                // converte a reposta para um JSON
+                const aluno: AlunoDTO = await respostaAPI.json();
+                // retorna a resposta
+                return aluno;
+            } else {
+                throw new Error("Não foi possível listar os alunos");
+            }
         } catch (error) {
-            console.error(`Erro ao fazer consulta do aluno. ${error}`);
+            console.error(`Erro ao fazer a consulta de aluno: ${error}`);
             return null;
         }
     }

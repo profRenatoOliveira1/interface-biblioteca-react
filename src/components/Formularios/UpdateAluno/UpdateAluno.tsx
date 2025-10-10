@@ -15,31 +15,28 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
 
     // Busca as informações do aluno para preencher o formulário
     useEffect(() => {
-        const fetchAlunos = async () => {  // função para obter dados do aluno
+        const fetchAlunos = async () => {   // função para fazer a consulta de alunos
             try {
-                const aluno = await AlunoRequests.consultaAluno(formData.idAluno);
-                console.log(aluno);
-                
+                const aluno = await AlunoRequests.consultarAluno(formData.idAluno); // Requisição à API
                 if (aluno) {
                     setFormData({
                         idAluno: formData.idAluno,
                         nome: aluno.nome || '',
                         sobrenome: aluno.sobrenome || '',
-                        dataNascimento: aluno.dataNascimento ? 
-                            new Date(aluno.dataNascimento).toISOString().slice(0, 10) : '',
+                        dataNascimento: aluno.dataNascimento
+                            ? new Date(aluno.dataNascimento).toISOString().slice(0, 10)
+                            : '',
                         endereco: aluno.endereco || '',
                         email: aluno.email || '',
                         celular: aluno.celular || ''
-                    });
+                    }); // Atualiza o estado com os dados
                 }
-
-                console.log(JSON.stringify(formData));
             } catch (error) {
-                console.error(`Erro ao buscar dados do aluno. ${error}`);
+                console.error(`Erro ao buscar alunos: ${error}`); // Exibe erro no console se a requisição falhar
             }
-        }
+        };
 
-        fetchAlunos();
+        fetchAlunos();  // Executa a função de busca 
     }, []);
 
     // Função para atualizar o state
