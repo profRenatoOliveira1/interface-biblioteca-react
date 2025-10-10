@@ -67,6 +67,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                             type="text"
                             name="nome"
                             id="nome"
+                            value={formData.nome}
                             required
                             minLength={3}
                             onChange={(e) => handleChange("nome", e.target.value)}
@@ -79,6 +80,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                             type="text"
                             name="sobrenome"
                             id="sobrenome"
+                            value={formData.sobrenome}
                             required
                             minLength={3}
                             onChange={(e) => handleChange("sobrenome", e.target.value)}
@@ -93,6 +95,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                             type="date"
                             name="dataNascimento"
                             id="dataNascimento"
+                            value={formData.dataNascimento}
                             onChange={(e) => handleChange("dataNascimento", e.target.value)}
                         />
                     </label>
@@ -100,11 +103,12 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                     <label htmlFor="">
                         Celular
                         <input
-                            type="number"
+                            type="tel"
                             name="celular"
                             id="celular"
                             minLength={10}
                             maxLength={13}
+                            value={formData.celular}
                             onChange={(e) => handleChange("celular", e.target.value)}
                         />
                     </label>
@@ -117,6 +121,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                             type="text"
                             name="endereco"
                             id="endereco"
+                            value={formData.endereco}
                             minLength={6}
                             onChange={(e) => handleChange("endereco", e.target.value)}
                         />
@@ -128,6 +133,7 @@ function UpdateAluno({ idAluno }: { idAluno: number }): JSX.Element {
                             type="email"
                             name="email"
                             id="email"
+                            value={formData.email}
                             minLength={11}
                             onChange={(e) => handleChange("email", e.target.value)}
                         />
