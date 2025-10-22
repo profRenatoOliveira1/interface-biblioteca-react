@@ -10,6 +10,7 @@ import PCadastroAluno from './pages/PCadastro/PCadastroAluno/PCadastroAluno';
 import PCadastroLivro from './pages/PCadastro/PCadastroLivro/PCadastroLivro';
 import PCadastroEmprestimo from './pages/PCadastro/PCadastroEmprestimo/PCadastroEmprestimo';
 import PAtualizacaoAluno from './pages/PAtualizacao/PAtualizacaoAluno/PAtualizacaoAluno';
+import PCadastroUsuario from './pages/PCadastro/PCadastroUsuario/PCadastroUsuario';
 
 /**
  * Componente que irá lidar com todas as rotas da aplicação
@@ -36,6 +37,8 @@ function AppRoutes(): JSX.Element {
                 <Route path={APP_ROUTES.ROUTE_CADASTRO_EMPRESTIMO} element={<PCadastroEmprestimo />} />
             
                 <Route path={`${APP_ROUTES.ROUTE_ATUALIZACAO_ALUNO}/:idAluno`} element={<PAtualizacaoAluno />} />
+
+                <Route path={`${APP_ROUTES.ROUTE_CADASTRO_USUARIO}`} element={<PCadastroUsuario />} />
             </Routes>
         </BrowserRouter>
     );

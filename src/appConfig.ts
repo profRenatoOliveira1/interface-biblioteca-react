@@ -19,7 +19,9 @@ export const APP_ROUTES = {
     ROUTE_CADASTRO_LIVRO: '/cadastro/livro',
     ROUTE_CADASTRO_EMPRESTIMO: '/cadastro/emprestimo',
 
-    ROUTE_ATUALIZACAO_ALUNO: '/atualizar/aluno'
+    ROUTE_ATUALIZACAO_ALUNO: '/atualizar/aluno',
+
+    ROUTE_CADASTRO_USUARIO: '/cadastro/usuario'
 }
 
 /**
@@ -52,7 +54,9 @@ export const SERVER_CFG = {
     ENDPOINT_REMOVER_EMPRESTIMO: '/remove/emprestimo',
 
     // endpoint de login
-    ENDPOINT_AUTH_LOGIN: '/login'
+    ENDPOINT_AUTH_LOGIN: '/login',
+
+    ENDPOINT_CADASTRO_USUARIO: '/novo/usuario'
 }
 
 /** Enumeração dos status do empréstimo */
