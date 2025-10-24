@@ -30,9 +30,7 @@ function FormUsuario(): JSX.Element {
         e.preventDefault();
         console.log(formData);
 
-        const resposta = await UsuarioRequests.enviarFormularioUsuario(formData);
-
-        resposta ? alert('Usuário cadastrado com sucesso!') : alert('Erro ao cadastrar usuário')
+        // enviar o formulário para o arquivo de requests
     };
 
     return (
@@ -83,15 +81,9 @@ function FormUsuario(): JSX.Element {
                         required
                     />
                 </div>
+                {/* Colocar o input para anexar o arquivo */}
                 <div className={estilo['input-group']}>
-                    <label htmlFor="imagemPerfil">Imagem de Perfil:</label>
-                    <input
-                        type="file"
-                        id="imagemPerfil"
-                        name="imagemPerfil"
-                        accept="image/*"
-                        onChange={handleInputChange}
-                    />
+                    
                 </div>
                 <button type="submit">Cadastrar</button>
             </form>
