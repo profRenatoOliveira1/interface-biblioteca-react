@@ -39,9 +39,9 @@ class LivroRequests {
                     'x-access-token': `${token}`
                 }
             });
-        
+
             // Verifica se a resposta da API foi bem-sucedida (status 200-299)
-            if(respostaAPI.ok) {
+            if (respostaAPI.ok) {
                 // Converte a resposta para formato JSON
                 const listaDeLivros: LivroDTO = await respostaAPI.json();
 
@@ -72,8 +72,64 @@ class LivroRequests {
                 body: formLivro
             });
 
-            if(!respostaAPI.ok) {
+            if (!respostaAPI.ok) {
                 throw new Error('Erro ao fazer requisição no servidor');
+            }
+
+            return true;
+        } catch (error) {
+            console.error(`Erro ao enviar o formulário. ${error}`);
+            return false;
+        }
+    }
+
+    /**
+     * Envia requisição para a API solicitando a remoção de um recurso
+     * @param idLivro ID do livro a ser removido
+     * @returns **true** se cadastro com sucesso, **false** se falha
+     */
+    async removerLivro(idLivro: number): Promise<boolean> {
+        const token = localStorage.getItem('token');
+        try {
+            const repostaAPI = await fetch(`${this.serverURL}${this.routeRemoveLivro}?idLivro=${idLivro}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'x-access-token': `${token}`
+                }
+            });
+
+            if (!repostaAPI.ok) {
+                throw new Error('Erro ao fazer requisição com o servidor.');
+            }
+
+            return false;
+        } catch (error) {
+            console.error(`Erro ao remover livro. ${error}`);
+            return false;
+        }
+    }
+
+    /**
+     * Envia os dados de atualização do formulário livro para a API
+     * @param formLivro Objeto com os valores do formulário
+     * @returns **true** se cadastro com sucesso, **false** se falha
+     */
+    async enviarFormularioAtualizacaoLivro(formLivro: LivroDTO): Promise<boolean> {
+        const token = localStorage.getItem('token');
+
+        try {
+            const respostaAPI = await fetch(`${this.serverURL}${this.routeAtualizaLivro}?idLivro=${formLivro.idLivro}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'x-access-token': `${token}`
+                },
+                body: JSON.stringify(formLivro)
+            });
+
+            if (!respostaAPI.ok) {
+                throw new Error('Erro ao fazer requisição para o servidor.');
             }
 
             return true;

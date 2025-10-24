@@ -33,10 +33,29 @@ function TabelaEmprestimo(): JSX.Element {
         fetchEmprestimos(); // Executa a função de busca
     }, []); // Array vazio indica que esse efeito será executado apenas uma vez (componenteDidMount)
 
+    const deletar = async (emprestimo: EmprestimoDTO) => {
+        const confirmar = window.confirm(`Deseja mesmo deletar empréstimo?`);
+
+        if (confirmar && typeof emprestimo.idEmprestimo === 'number') {
+            const removido = await EmprestimoRequests.removerEmprestimo(emprestimo.idEmprestimo);
+            (removido) ?
+                window.location.reload() :
+                alert('Erro ao remover empréstimo.')
+        } else if (confirmar) {
+            alert('ID do empréstimo inválido');
+        }
+    }
+
     return (
         <main>
             {/* Título da tabela com classe personalizada */}
             <h1 className={estilo['header-tabela-emprestimo']}>Lista de Empréstimos</h1>
+            <a
+                href={APP_ROUTES.ROUTE_CADASTRO_EMPRESTIMO}
+                className={estilo['anc-pag-cadastro']}
+            >
+                CADASTRAR EMPRÉSTIMO
+            </a>
 
             <a
                 href={APP_ROUTES.ROUTE_CADASTRO_EMPRESTIMO}
@@ -68,7 +87,7 @@ function TabelaEmprestimo(): JSX.Element {
                 <Column
                     field="dataEmprestimo"
                     header="Data do emprétimo"
-                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}}
+                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }}
                     style={{ width: '15%', color: 'var(--font-color)' }}
                     body={(rowData) => {
                         const data = new Date(rowData.dataEmprestimo); // Converte a string de data em objeto Date
@@ -83,7 +102,7 @@ function TabelaEmprestimo(): JSX.Element {
                 <Column
                     field="dataDevolucao"
                     header="Data de devolução"
-                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}}
+                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }}
                     style={{ width: '15%', color: 'var(--font-color)' }}
                     body={(rowData) => {
                         const data = new Date(rowData.dataDevolucao); // Converte a string de data em objeto Date
@@ -95,7 +114,30 @@ function TabelaEmprestimo(): JSX.Element {
                 />
 
                 {/* Coluna com o status do empréstimo (ex: "pendente", "devolvido") */}
-                <Column field="statusEmprestimo" header="Status do empréstimo" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)'}} style={{ width: '15%', color: 'var(--font-color)' }} />
+                <Column field="statusEmprestimo" header="Status do empréstimo" headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }} style={{ width: '15%', color: 'var(--font-color)' }} />
+
+                <Column
+                    field='idEmprestimo'
+                    header='Ação'
+                    headerStyle={{ backgroundColor: 'var(--cor-primaria)', color: 'var(--font-color)' }}
+                    style={{ width: '15%', color: 'var(--font-color)' }}
+                    body={(rowdata) => (
+                        <>
+                            <button
+                                style={{ width: '100%' }}
+                                onClick={() => alert(`Atualizar ${rowdata.idEmprestimo}`)}
+                            >
+                                Atualizar
+                            </button>
+                            <button
+                                style={{ width: '100%' }}
+                                onClick={() => deletar(rowdata)}
+                            >
+                                Deletar
+                            </button>
+                        </>
+                    )}
+                />
             </DataTable>
         </main>
     );

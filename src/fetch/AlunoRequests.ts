@@ -104,7 +104,7 @@ class AlunoRequests {
             });
 
             if(!respostaAPI.ok) {
-                throw new Error('Erro ao fazer requisição com o servidor.');
+                throw new Error('Erro ao fazer requisição para o servidor.');
             }
 
             return true;
