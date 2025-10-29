@@ -29,8 +29,11 @@ function FormUsuario(): JSX.Element {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log(formData);
-
+        // usuário: joao.silva senha: joao.silva1234
         // enviar o formulário para o arquivo de requests
+        const resposta = await UsuarioRequests.enviarFormularioUsuario(formData);
+
+        resposta ? alert(`Usuário cadastrado com sucesso!`) : alert(`Erro ao cadastrar usuário.`);
     };
 
     return (
@@ -83,7 +86,14 @@ function FormUsuario(): JSX.Element {
                 </div>
                 {/* Colocar o input para anexar o arquivo */}
                 <div className={estilo['input-group']}>
-                    
+                    <label htmlFor="imagemPerfil">Imagem de Perfil:</label>
+                    <input 
+                        type="file" 
+                        name="imagemPerfil" 
+                        id="imagemPerfil"
+                        accept="image/*"
+                        onChange={handleInputChange}
+                    />
                 </div>
                 <button type="submit">Cadastrar</button>
             </form>
