@@ -10,19 +10,23 @@ import estilo from './Cabecalho.module.css';
 import logotipo from '../../assets/logotipo.png';
 
 // Importa as rotas da aplicação definidas no arquivo de configuração
-import { APP_ROUTES } from '../../appConfig';
+import { APP_ROUTES, SERVER_CFG } from '../../appConfig';
 
 // Declara o componente funcional Cabecalho que retorna um elemento JSX
 function Cabecalho(): JSX.Element {
     // estado para controlar a renderização condicional
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    // estado para salvar o nome da imagem de perfil
+    const [imagemPerfil, setImagemPerfil] = useState('');
 
     useEffect(() => {
         const isAuth: boolean = localStorage.getItem('isAuth') === 'true'; // recupera o valor isAuth do localStorage e converte em um boolean
         const token: string | null = localStorage.getItem('token'); // recupera o valor do token do localStorage
+        const imagemPerfil: string | null = localStorage.getItem('imagemPerfil'); // recupera o valor imagemPerfil do localStorage
         // verifica se isAuth é verdadeiro, se o token não é nulo e se o token não está expirado
         if (isAuth && token && AuthRequests.checkTokenExpiry()) {
             setIsAuthenticated(true); // define o estado para verdadeiro
+            setImagemPerfil(imagemPerfil ? imagemPerfil : '');
         } else {
             setIsAuthenticated(false); // define o estado para falso
         }
@@ -48,6 +52,13 @@ function Cabecalho(): JSX.Element {
 
                     {/* Link para navegar até a listagem de empréstimos */}
                     <a href={APP_ROUTES.ROUTE_LISTAGEM_EMPRESTIMOS}>Empréstimos</a>
+
+                    {/* Adicionando imagem de perfil do usuário quando ele estiver logado */}
+                    <img 
+                        src={`${SERVER_CFG.SERVER_URL}/uploads/${imagemPerfil}`} 
+                        alt="Imagem de perfil" 
+                        style={{ width: '50px', height: '50px', borderRadius: '50%'}}
+                    />
 
                     {/* Link para navegar até a página de login */}
                     <Button
